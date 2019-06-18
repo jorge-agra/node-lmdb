@@ -27,15 +27,9 @@ before_deploy:
   - tar -zcvf "%ARCHIVE_NAME%" -C prebuilds .
   - appveyor PushArtifact %ARCHIVE_NAME%
 
-artifacts:
-  - path: prebuilds
-    name: $(APPVEYOR_REPO_TAG_NAME)-win-$(PLATFORM)
-    type: zip
-
-
 deploy:
   - provider: GitHub
-    artifact: /.*\.zip/
+    artifact: $(ARCHIVE_NAME)
     draft: false
     prerelease: true
     auth_token:
