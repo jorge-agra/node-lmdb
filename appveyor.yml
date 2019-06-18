@@ -36,4 +36,4 @@ deploy:
       secure: cenas-appveyor
     on:
       appveyor_repo_tag: true
-      nodejs_version: "Current"
+      nodejs_version: "10"
