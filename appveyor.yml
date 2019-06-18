@@ -32,7 +32,7 @@ deploy:
     draft: false
     prerelease: true
     auth_token:
-      secure: cenas-appveyor
+      secure: HzdCSCozmgsygSGH7gTddZR3htpkU3W5EhkFzAuYVRJmWPAbCn6bulck6aFwHBeR
     on:
       appveyor_repo_tag: true
       nodejs_version: "10"
