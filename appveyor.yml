@@ -5,6 +5,7 @@ skip_branch_with_pr: true
 environment:
   matrix:
     - nodejs_version: "10"
+    - nodejs_version: "Current"
 
 configuration: Release
 platform:
@@ -21,19 +22,18 @@ test_script:
   - node --version
   - npm --version
 
-before_deploy:
-  - SET ARCHIVE_NAME=%APPVEYOR_REPO_TAG_NAME%-win32-%PLATFORM%.tar.gz
-  - npm run prebuild
-  - tar -zcvf "%ARCHIVE_NAME%" -C prebuilds .
-  - appveyor PushArtifact %ARCHIVE_NAME%
+artifacts:
+  - path: build\release
+    name: node-lmdb.node
+
 
 deploy:
   - provider: GitHub
-    artifact: $(ARCHIVE_NAME)
+    artifact: node-lmdb.node
     draft: false
     prerelease: true
     auth_token:
       secure: cenas-appveyor
     on:
       appveyor_repo_tag: true
-      nodejs_version: "10"
+      nodejs_version: "Current"
