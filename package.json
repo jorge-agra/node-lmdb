@@ -27,8 +27,8 @@
     "lightning",
     "binding"
   ],
-  "repository": "https://github.com/Venemo/node-lmdb",
-  "version": "0.6.2",
+  "repository": "https://github.com/jorge-agra/node-lmdb",
+  "version": "0.5.11",
   "main": "./index.js",
   "scripts": {
     "install": "prebuild-install || node-gyp rebuild",
@@ -39,8 +39,9 @@
   "gypfile": true,
   "dependencies": {
     "bindings": "^1.5.0",
-    "prebuild-install": "^5.2.5",
-    "nan": "^2.13.1"
+    "nan": "^2.13.1",
+    "node-gyp-build": "^4.1.0",
+    "prebuild-install": "^5.2.5"
   },
   "devDependencies": {
     "benchmark": "^2.1.4",
