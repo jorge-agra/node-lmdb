@@ -16,19 +16,25 @@ install:
   - SET PATH=%APPDATA%\npm;%APPVEYOR_BUILD_FOLDER%\node_modules\.bin;%PATH%
   - git submodule update --init --recursive
   - npm i
+    on:
+      appveyor_repo_tag: true
 
 test_script:
   - node --version
   - npm --version
+    on:
+      appveyor_repo_tag: true
 
 before_deploy:
   - rm -rf prebuilds
   - mkdir prebuilds
-  - mkdir prebuilds/win32-x64
-  - cp build/Release/node-lmdb.node prebuilds/win32-x64/node.abi64.node
+  - mkdir prebuilds\win32-x64
+  - cp build\Release\node-lmdb.node prebuilds\win32-x64\node.abi64.node
   - SET ARCHIVE_NAME=%APPVEYOR_REPO_TAG_NAME%-win32-%PLATFORM%.tar.gz
   - tar -zcvf "%ARCHIVE_NAME%" -C prebuilds .
   - appveyor PushArtifact %ARCHIVE_NAME%
+    on:
+      appveyor_repo_tag: true
   
 
 deploy:
