@@ -21,16 +21,16 @@ test_script:
   - node --version
   - npm --version
 
-artifacts:
-  - path: win32-x64
-    name: node.abi64.node
-
 before_deploy:
-    - cp build\release\node-lmdb.node win32-x64\node.abi64.node
+  - SET ARCHIVE_NAME=%APPVEYOR_REPO_TAG_NAME%-win32-%PLATFORM%.tar.gz
+  - npm run prebuild
+  - tar -zcvf "%ARCHIVE_NAME%" -C prebuilds .
+  - appveyor PushArtifact %ARCHIVE_NAME%
+  
 
 deploy:
   - provider: GitHub
-    artifact: node.abi64.node
+    artifact: $(ARCHIVE_NAME)
     draft: false
     prerelease: true
     auth_token:
