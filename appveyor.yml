@@ -22,7 +22,7 @@ test_script:
   - npm --version
 
 before_deploy:
-  - rm -r prebuilds
+  - rm -rf prebuilds
   - mkdir prebuilds
   - mkdir prebuilds/win32-x64
   - cp build/Release/node-lmdb.node prebuilds/win32-x64/node.abi64.node
