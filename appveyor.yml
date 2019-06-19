@@ -22,8 +22,11 @@ test_script:
   - npm --version
 
 before_deploy:
+  - rm -r prebuilds
+  - mkdir prebuilds
+  - mkdir prebuilds/win32-x64
+  - cp build/Release/node-lmdb.node prebuilds/win32-x64/node.abi64.node
   - SET ARCHIVE_NAME=%APPVEYOR_REPO_TAG_NAME%-win32-%PLATFORM%.tar.gz
-  - npm run prebuild
   - tar -zcvf "%ARCHIVE_NAME%" -C prebuilds .
   - appveyor PushArtifact %ARCHIVE_NAME%
   
